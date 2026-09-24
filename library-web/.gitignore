@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+coverage
+
+# Keep .env.example, ignore real env files
+.env.*.local

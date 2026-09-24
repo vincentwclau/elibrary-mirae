@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: library-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/elibrary}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
+
+server:
+  port: 8080
+
+# Application-specific configuration
+app:
+  cors:
+    # Vite dev server origin(s) allowed to call this API
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  jwt:
+    # Base64-encoded HMAC secret. Override in production via APP_JWT_SECRET.
+    secret: ${APP_JWT_SECRET:c3VwZXItc2VjcmV0LWtleS1mb3ItZWxpYnJhcnktZGVtby1vbmx5LWNoYW5nZS1tZQ==}
+    # Access token lifetime in milliseconds (default 24h)
+    expiration-ms: ${APP_JWT_EXPIRATION_MS:86400000}
+  loan:
+    # Maximum number of concurrent active loans a member may hold
+    max-active-loans: 5
+    # Loan period in days
+    period-days: 14
+
+logging:
+  level:
+    org.springframework.security: INFO
