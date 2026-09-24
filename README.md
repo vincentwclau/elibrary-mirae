@@ -97,24 +97,3 @@ shapes, error format, and the full list of enforced business rules.
 cd library-service && ./mvnw test     # backend: unit + repository + integration
 cd library-web    && npm run test     # frontend: Vitest + React Testing Library
 ```
-
-## Key assumptions & trade-offs
-
-These are the notable "reasonable assumptions" made where the brief was open. Details
-live in the per-service READMEs; the headline decisions:
-
-- **Physical-copy loan model.** Books have `totalCopies` / `availableCopies`; borrowing
-  decrements and returning increments. This gives real availability semantics and a
-  natural place for concurrency control (`@Version` optimistic locking on `Book`).
-- **Business rules in the service layer**, not the controllers or the database: a
-  member may hold at most 5 active loans, cannot hold two active loans of the same
-  book, and can only return their own loans. Violations map to HTTP 409.
-- **`ddl-auto: update` instead of migrations.** Appropriate for a take-home; a
-  production system would use Flyway/Liquibase. Called out here deliberately.
-- **JWT over sessions** to keep the API stateless and the two services cleanly
-  decoupled. Tokens are stored in `localStorage` on the client — a pragmatic choice
-  for this scope; the trade-offs are noted in the frontend README.
-- **No Docker** (per the brief) — services are run directly and Postgres is provided
-  by the developer's environment.
-```
-
