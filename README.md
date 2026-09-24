@@ -14,9 +14,9 @@ The backend is **API-only** and the frontend runs on its own Vite dev server; th
 communicate over HTTP with CORS configured between them. Each service has its own
 README with setup and design notes — this file is the map and the quick start.
 
-![login-page](img/login-page.jpeg)
-![landing-page](img/landing-page.jpeg)
-![book-page](img/book-page.jpeg)
+![login-page](img/login-page.png)
+![landing-page](img/landing-page.png)
+![book-page](img/book-page.png)
 
 ## Architecture at a glance
 
